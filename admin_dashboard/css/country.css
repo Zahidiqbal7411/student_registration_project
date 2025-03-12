@@ -117,3 +117,9 @@ button[type="submit"]:hover {
 .btn-submit:hover {
     background-color: #0056b3;
 }
+.btn-small {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;  /* Removes extra padding if any */
+    font-size: 12px !important;  /* Adjust font size for better fit */
+}

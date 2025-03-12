@@ -253,7 +253,7 @@ if ($admin_username && $admin_password == true) {
                                         <div class="card slider_card">
                                            
                                             <div class="card-body">
-                                                <button class="btn btn-primary" onclick="country()">Add Country</button>
+                                                <button class="btn btn-secondary" onclick="country()">Add Country</button>
                                             </div>
                                         </div>
                                     </div>
@@ -262,7 +262,7 @@ if ($admin_username && $admin_password == true) {
                                         <div class="card news_card">
                                             
                                             <div class="card-body">
-                                                <button class="btn btn-primary" onclick="state()">Add State</button>
+                                                <button class="btn btn-secondary" onclick="state()">Add State</button>
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +271,7 @@ if ($admin_username && $admin_password == true) {
                                         <div class="card marquee_card">
                                             
                                             <div class="card-body">
-                                                <button class="btn btn-primary" onclick="city()">Add City</button>
+                                                <button class="btn btn-secondary" onclick="city()">Add City</button>
                                             </div>
                                         </div>
                                     </div>
@@ -285,6 +285,7 @@ if ($admin_username && $admin_password == true) {
       
       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../js/country.js"></script>
+   
 
             <?php 
           require_once('country_html.php');

@@ -18,7 +18,7 @@
 
     <!-- Table Container -->
     <div class="table-container mt-4">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="country_table">
             <thead>
                 <tr>
                     <th>S no</th>
@@ -29,12 +29,15 @@
             <tbody id="country_table_body">
                 <!-- Example Row (This will be dynamically populated) -->
                 <tr>
-                    <td>1</td>
-                    <td>Example Country</td>
-                    <td><button class="btn btn-primary fw-10 w-10">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-                </tr>
+    <td>1</td>
+    <td></td>
+    <td>
+        
+        <button class="btn btn-danger btn-sm w-100" >Delete</button>
+        <button class="btn btn-danger btn-sm w-100" >Delete</button>
+    </td>
+</tr>
+
             </tbody>
         </table>
     </div>
