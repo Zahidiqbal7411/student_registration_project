@@ -3,7 +3,7 @@
 $localhost = 'localhost';
 $name = 'root';
 $password = '';
-$db_name = 'techfusion_website';
+$db_name = 'student_registration_project';
 
 $conn = mysqli_connect($localhost, $name, $password, $db_name);
 if($conn){

@@ -78,3 +78,42 @@ button[type="submit"]:hover {
         max-width: 100%;
     }
 }
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-heading {
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+}
+
+.country-label {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-submit {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
