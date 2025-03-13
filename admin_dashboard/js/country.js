@@ -84,9 +84,10 @@ $(document).ready(function() {
             data: JSON.stringify(formData),  // Send the form data as JSON
             dataType: 'json',  // Expect JSON response from the server
             success: function(data) {
+                console.log(data);
                 // Handle the server's response
                 if (data.status === 'success') {
-                    $('#country_form')[0].reset(); // Reset the form
+                    $('#country_title').val(''); // Reset the form
 
                     // Create a new row dynamically
                     const newRow = 
@@ -114,50 +115,81 @@ $(document).ready(function() {
         });
     });
 });
-$(document).ready(function() {
-    // When the "Edit" button is clicked
-    $(document).on('click', '.edit-btn', function() {
-        var countryId = $(this).data('id');
-        var countryName = $(this).data('name');
-        var countryCode = $(this).data('code');
-        
-        // Show a modal or a form for editing
-        $('#editModal').modal('show');
-        
-        // Pre-fill the modal with the current data
-        $('#countryId').val(countryId);
-        $('#countryName').val(countryName);
-        $('#countryCode').val(countryCode);
-    });
+$(document).on('click', '.delete-btn', function() {
+    var countryId = $(this).data('id'); // Get the country_id from data-id attribute
+    var row = $(this).closest('tr'); // Capture the row that contains the delete button
 
-    // When the form is submitted
-    $('#editForm').submit(function(e) {
-        e.preventDefault(); // Prevent the default form submission
+    console.log('Country ID:', countryId); // Debugging: Log countryId
 
-        var countryId = $('#countryId').val();
-        var countryName = $('#countryName').val();
-        
-
+    // Confirm the delete action
+    if (confirm('Are you sure you want to delete this country?')) {
+        // Perform the AJAX request
         $.ajax({
-            url: 'edit_country.php', // PHP script to handle the edit
-            method: 'POST',
-            data: {
-                country_id: countryId,
-                country_title: countryName,
-               
-            },
+            url: 'delete_country.php', // Your backend script to handle the delete action
+            type: 'POST',
+            data: { country_id: countryId }, // Send the country_id to the server
+            dataType: 'json', // Ensure the response is treated as JSON
             success: function(response) {
-                // Assuming the response is the success message
-                if (response.status == 'success') {
-                    alert('Country updated successfully');
-                    location.reload(); // Reload the page to reflect changes
+                console.log('Response:', response); // Debugging: Log the response from PHP
+
+                if (response.success) {
+                   
+                    // Remove the row from the table if the deletion was successful
+                    row.remove(); // Use the captured row reference to remove it from the table
                 } else {
-                    alert('Error: ' + response.message);
+                    alert('Error deleting country: ' + response.error);
                 }
             },
             error: function(xhr, status, error) {
-                console.error('AJAX error:', error);
-                alert('There was an error processing your request.');
+                alert('An error occurred: ' + error);
+            }
+        });
+    }
+});
+$(document).ready(function () {
+    // When the Edit button is clicked
+    $(document).on('click', '.edit-btn', function () {
+        var $row = $(this).closest('tr'); // Get the row that contains the Edit button
+        var countryId = $(this).data('id'); // Get the country ID from the button's data-id attribute
+        var countryName = $row.find('td:nth-child(2)').text(); // Get the country name from the row's first cell (assuming it's the country name)
+          console.log(countryName);
+        // Populate the form fields with the current country details
+        $('#country_title').val(countryName); // Set the country name into the form's input field
+        // $('#country_form').data('country-id', countryId); // Store the country ID in the form for later use
+           
+        // Show the form to the user
+        $('#country_form').show();
+    });
+
+    // When the form is submitted
+    $('#country_form').on('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var countryId = $(this).data('country-id'); // Get the country ID from the form
+        var updatedName = $('#country_title').val(); // Get the updated country name from the input field
+
+        // Send the updated data to the server via Ajax
+        $.ajax({
+            url: 'country_edit.php', // Replace with your actual URL endpoint
+            method: 'POST',
+            data: {
+                id: countryId,
+                name: updatedName
+            },
+            success: function (response) {
+                if (response.success) {
+                    console.log(response.success);
+                    // Update the country name in the correct table row
+                    $('#row-' + countryId).find('td:nth-child(2)').text(updatedName);
+
+                    // Hide the form after saving the changes
+                    $('#country_form').hide();
+                } else {
+                    alert('Error updating country name.');
+                }
+            },
+            error: function () {
+                alert('Error occurred while saving the data.');
             }
         });
     });

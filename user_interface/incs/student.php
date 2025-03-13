@@ -1,18 +1,22 @@
 <?php 
 require_once('conn.php');
 
-// Check if the form is submitted with the correct button
-if (isset($_POST['submit']) && $_POST['submit'] == 'std') {
+// Debugging: Turn on error reporting
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+if (isset($_POST['student']) && $_POST['student'] == 'std') {
+    // Debugging: Check if data is being posted
+    var_dump($_POST); // This will show the posted data, helpful for debugging
+
     // Collecting form data
     $stName = $_POST['studentName'];
-    $stFathername = $_POST['fatheName'];
+    $stFathername = $_POST['fatherName'];
     $stCnic = $_POST['studentCnic'];
-    $stFatherCnic = $_POST['fatheCnic'];
+    $stFatherCnic = $_POST['fatherCnic'];
     $stContact = $_POST['studentContact'];
-    $stFatherContact = $_POST['fatherContact'];
+    $stFatherContact = $_POST['guardianContact'];
     $stCountryName = $_POST['country'];
-    $stStateName = $_POST['state'];
-    $stCityName = $_POST['city'];
 
     // Prepare the SQL query using a prepared statement
     $query = "INSERT INTO student_form (s_name, s_fathername, s_cnic, f_cnic, s_contact, st_fcontact, st_country) 
@@ -47,6 +51,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'std') {
                     confirmButtonText: "OK"
                 });
             </script>';
+            echo 'Error: ' . $stmt->error;  // Show SQL error
         }
 
         // Close the prepared statement
@@ -65,7 +70,4 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'std') {
         </script>';
     }
 }
-
-// Close the database connection
-$conn->close();
 ?>

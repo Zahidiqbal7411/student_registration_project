@@ -107,31 +107,3 @@ document.getElementById('state').addEventListener('change', function () {
                     modal.style.display = "none";
                 }
             }
-
-            // When the user clicks "Choose a new image" button, trigger file input
-            chooseButton.onclick = function() {
-                imageUploadInput.click();
-            }
-
-            // Preview image function (when user selects a new image)
-            imageUploadInput.onchange = function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        modalImage.src = e.target.result; // Update the image in the modal
-                        img.src = e.target.result; // Update the image outside the modal
-                    };
-                    reader.readAsDataURL(file); // Read the file as a data URL (base64)
-                }
-            }
-        });
-    
-
-
-
-
-
-
-
-

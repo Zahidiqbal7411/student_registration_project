@@ -4,14 +4,14 @@ require_once('conn.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the POSTed data
-    $countryId = $_POST['country_id'];
+    $countryId = $_POST['id'];
     $countryName = $_POST['country_title'];
    
 
     // Sanitize input (for security)
     $countryId = intval($countryId);
     $countryName = htmlspecialchars($countryName);
-    $countryCode = htmlspecialchars($countryCode);
+  
 
     // Prepare and execute SQL update query
     $sql = "UPDATE countries SET name = ? WHERE country_id = ?";
